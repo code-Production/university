@@ -68,6 +68,7 @@ public class StudentService {
         return StudentMapper.MAPPER.toDto(newStudent);
     }
 
+    @Transactional
     public StudentDto update(StudentDto studentDto) {
         if (studentDto.getId() != null && studentRepository.existsById(studentDto.getId())) {
             Student updatedStudent = studentRepository.save(StudentMapper.MAPPER.toEntity(studentDto));
@@ -79,6 +80,7 @@ public class StudentService {
         );
     }
 
+    @Transactional
     public void deleteById(Long id) {
         if (studentRepository.existsById(id)) {
             studentRepository.deleteById(id);
