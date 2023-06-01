@@ -95,11 +95,11 @@ angular.module('app').controller('indexController', function ($scope, $http) {
         })
     }
 
-    $scope.editStudent = function(id, name, mark) {
-        console.log(id, name, mark);
-        $scope.newStudent.id = id;
-        $scope.newStudent.name = name;
-        $scope.newStudent.mark = mark;
+    $scope.editStudent = function(student) {
+        console.log(student);
+        $scope.newStudent.id = student.id;
+        $scope.newStudent.name = student.name;
+        $scope.newStudent.mark = student.mark;
     }
 
 });
