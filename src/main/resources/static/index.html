@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+    <head>
+        <title>Main page</title>
+        <meta charset="UTF-8">
+
+        <script src="/scripts/angular.min1.8.0.js"></script>
+        <script src="/scripts/bootstrap.bundle.min.js"></script>
+        <script src="index.js"></script>
+
+        <link rel="stylesheet" href="/scripts/bootstrap.min.css">
+    </head>
+
+    <body ng-controller="indexController">
+        <main class="d-flex flex-nowrap">
+            <div class="d-flex flex-column align-items-end flex-shrink-0 p-3 " style="width: 260px;">
+                <div class="p-2">
+                    <a href="/static" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <svg class="bi pe-none me-2" width="50" height="32"><use xlink:href="#bootstrap"/></svg>
+                        <span class="fs-4"><b>Add student:</b></span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column">
+                        <li>
+                            <form novalidate ng-submit="addUpdateStudent()">
+                                <input class="form-control" type="number" placeholder="id"  ng-model="newStudent.id">
+                                <p></p>
+                                <input class="form-control" type="text" placeholder="name"  ng-model="newStudent.name">
+                                <p></p>
+                                <input class="form-control" type="number" placeholder="mark" ng-model="newStudent.mark">
+                                <p></p>
+                                <button class="btn btn-primary" type="submit">Add/Update</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <div class="p-2">
+                    <a href="/static" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+                        <span class="fs-4"><b>Filter students:</b></span>
+                    </a>
+                    <hr>
+                    <ul class="nav nav-pills flex-column">
+                        <li>
+                            <form novalidate ng-submit="filteredStudents()">
+                                <input class="form-control" type="text" placeholder="name part" ng-model="filter.name_part">
+                                <p></p>
+                                <input class="form-control" type="number" placeholder="lesser than"  ng-model="filter.mark_lesser_than">
+                                <p></p>
+                                <input class="form-control" type="number" placeholder="greater than" ng-model="filter.mark_greater_than">
+                                <p></p>
+                                <button class="btn btn-primary" type="submit">Filter</button>
+                                <button class="btn btn-secondary" type="button" ng-click="clearFilter()">Clear</button>
+                            </form>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="container " >
+                <h3>Список студентов:</h3>
+
+                <table class="table table-hover ">
+                    <tr class="bg-light">
+                        <td><b>Id:</b></td>
+                        <td><b>Name:</b></td>
+                        <td><b>Mark:</b></td>
+                        <td><b>Actions:</b></td>
+                    </tr>
+                    <tbody>
+                    <tr ng-repeat="s in StudentList">
+                        <td>{{s.id}}</td>
+                        <td>{{s.name}}</td>
+                        <td>{{s.mark}}</td>
+                        <td>
+                            <button class="btn btn-primary" ng-click="editStudent(s)">Edit</button>
+                            <button class="btn btn-danger" ng-click="deleteStudent(s.id)">Delete</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tr>
+                        <td><button class="btn btn-primary" ng-click="prevPage()" ng-if="!firstPage">Prev</button></td>
+                        <td><b>Page: {{pageNumber + 1}}</b></td>
+                        <td><button class="btn btn-primary" ng-click="nextPage()" ng-if="!lastPage">Next</button></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </body>
+
+</html>
